@@ -1,0 +1,10 @@
+# 如果mysql忘记了密码怎么办？有几种解决办法呢？
+**设置密码：** alter user 'root'@'localhost' identified by '';    
+**1.**普通用户，直接用root超级管理员登录进去修改密码   
+**2.**msyqld_saft方式找回密码
+停止mysql：service mysqld stop; 
+安全模式启动：mysqld_safe –skip-grant-tables & 
+无密码回车键登录：mysql -uroot –p 
+重置密码：use mysql; update user set password=password('') where user=’root’ and host=’localhost’; flush privileges; 
+正常启动：service mysql restart 
+再使用mysqladmin： mysqladmin password '123456' 
